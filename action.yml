@@ -1,0 +1,56 @@
+name: Composite Retry
+author: rudolph9 <krudolph9@gmail.com>
+description: Retries a Github Action step on failure
+inputs:
+  action:
+    description: Github action to run.
+    required: true
+  with:
+    description: An options map for Github action
+    required: false
+  attempt_limit:
+    description: TODO: Number of attempts
+    required: false
+    default: 2
+  attempt_delay:
+    description: TODO: A delay between attempts in ms
+    required: false
+    default: 0
+runs:
+  using: composite
+  steps:
+    - id: composite-retry0
+      name: Composite Retry
+      uses: '${{ inputs.action }}'
+      with: ${{ inputs.action }}
+      continue-on-error: true
+    - if: ${{ steps.composite-retry0.outcome == 'failure' }}
+      id: composite-retry1
+      name: Composite Retry
+      uses: '${{ inputs.action }}'
+      with: ${{ inputs.action }}
+      continue-on-error: true
+    - if: ${{ steps.composite-retry1.outcome == 'failure' }}
+      id: composite-retry2
+      name: Composite Retry
+      uses: '${{ inputs.action }}'
+      with: ${{ inputs.action }}
+      continue-on-error: true
+    - if: ${{ steps.composite-retry2.outcome == 'failure' }}
+      id: composite-retry3
+      name: Composite Retry
+      uses: '${{ inputs.action }}'
+      with: ${{ inputs.action }}
+      continue-on-error: true
+    - if: ${{ steps.composite-retry3.outcome == 'failure' }}
+      id: composite-retry4
+      name: Composite Retry
+      uses: '${{ inputs.action }}'
+      with: ${{ inputs.action }}
+      continue-on-error: true
+    - if: ${{ steps.composite-retry4.outcome == 'failure' }}
+      id: composite-retry5
+      name: Composite Retry
+      uses: '${{ inputs.action }}'
+      with: ${{ inputs.action }}
+      # last retry has no continue on error
