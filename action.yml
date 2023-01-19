@@ -10,11 +10,11 @@ inputs:
     required: false
     default: '{}'
   attempt_limit:
-    description: TODO: Number of attempts
+    description: 'TODO: Number of attempts'
     required: false
     default: 2
   attempt_delay:
-    description: TODO: A delay between attempts in ms
+    description: 'TODO: A delay between attempts in ms'
     required: false
     default: 0
 runs:
