@@ -1,8 +1,9 @@
 # Composite Retry
 
-Retries an Github Action step or command on failure.
+Retries a Github Action.
 
-Works with either shell commands or other actions to retry.
+Works with other actions to retry. Use [Retry Step](https://github.com/marketplace/actions/retry-step) if you
+want to retry a command.
 
 This package is very similar and inspired by [retry-action](https://github.com/marketplace/actions/retry-action)
 but is built as a [Composite Action](https://docs.github.com/en/actions/creating-actions/about-custom-actions#composite-actions)
@@ -11,18 +12,7 @@ to avoid some of the complexity and nuanced issues that come with JavaScript act
 
 # Why
 
-Github actions which use an Internet connection can fail when connection is lost :
-
-```
-Run actions/setup-node@v1
-connect ETIMEDOUT 104.20.22.46:443
-Waiting 15 seconds before trying again
-connect ETIMEDOUT 104.20.22.46:443
-Waiting 18 seconds before trying again
-Error: connect ETIMEDOUT 104.20.22.46:443
-```
-
-It is a cause of failed jobs. For this case, the action rudolph9/composite-retry can retry the action immediately after fail or with some delay. And if the connection will be restored, then the job will continue the normal run.
+Sometimes you need to retry an action. This is a dead simple impl to retry a Github action.
 
 # Background
 
