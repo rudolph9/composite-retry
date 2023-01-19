@@ -6,9 +6,9 @@ inputs:
     description: Github action to run.
     required: true
   with:
-    description: An options map for Github action
+    description: A JSON string options map for Github action
     required: false
-    default: {}
+    default: '{}'
   attempt_limit:
     description: TODO: Number of attempts
     required: false
@@ -23,35 +23,35 @@ runs:
     - id: composite-retry0
       name: Composite Retry
       uses: '${{ inputs.uses }}'
-      with: ${{ inputs.with }}
+      with: ${{ fromJSON(inputs.with) }}
       continue-on-error: true
     - if: ${{ steps.composite-retry0.outcome == 'failure' }}
       id: composite-retry1
       name: Composite Retry
       uses: '${{ inputs.uses }}'
-      with: ${{ inputs.with }}
+      with: ${{ fromJSON(inputs.with) }}
       continue-on-error: true
     - if: ${{ steps.composite-retry1.outcome == 'failure' }}
       id: composite-retry2
       name: Composite Retry
       uses: '${{ inputs.uses }}'
-      with: ${{ inputs.with }}
+      with: ${{ fromJSON(inputs.with) }}
       continue-on-error: true
     - if: ${{ steps.composite-retry2.outcome == 'failure' }}
       id: composite-retry3
       name: Composite Retry
       uses: '${{ inputs.uses }}'
-      with: ${{ inputs.with }}
+      with: ${{ fromJSON(inputs.with) }}
       continue-on-error: true
     - if: ${{ steps.composite-retry3.outcome == 'failure' }}
       id: composite-retry4
       name: Composite Retry
       uses: '${{ inputs.uses }}'
-      with: ${{ inputs.with }}
+      with: ${{ fromJSON(inputs.with) }}
       continue-on-error: true
     - if: ${{ steps.composite-retry4.outcome == 'failure' }}
       id: composite-retry5
       name: Composite Retry
       uses: '${{ inputs.uses }}'
-      with: ${{ inputs.with }}
+      with: ${{ fromJSON(inputs.with) }}
       # last retry has no continue on error
